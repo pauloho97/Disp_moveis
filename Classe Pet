@@ -1,0 +1,18 @@
+package aula01;
+
+public class Pet {
+	
+	public String nome;
+	public int idade;
+	public String raca;
+	public float peso;
+	
+	
+	@Override
+	public String toString() {
+		return "Pet [nome=" + nome + ", idade=" + idade + ", raca=" + raca + ", peso=" + peso + "]";
+	}
+	
+	
+
+}
