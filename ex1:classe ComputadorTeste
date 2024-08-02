@@ -1,0 +1,35 @@
+package Ex_aula_01;
+
+import java.util.ArrayList;
+
+public class ComputadorTeste {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Computador> comp = new ArrayList<Computador>();
+		
+		Computador pc1 = new Computador("DELL", 1);
+		Computador pc2 = new Computador("Lenovo", 2);
+		Computador pc3 = new Computador("Sansung", 3);
+		
+		comp.add(pc1);
+		comp.add(pc2);
+		comp.add(pc3);
+		
+		//foreach
+		/*for (Computador pont : comp) {
+			System.out.println(pont);
+		}*/
+		
+		//for tradicional
+		for (int c = 0; c < comp.size(); c++) {
+			System.out.println(comp.get(c));
+		}
+		
+		//Explicando o get(c)
+		//em vez de imprimir 3 vezes toda a lista, ele imprime apenas cada elemento do índice c
+		
+		//System.out.println(pc);
+	}
+
+}
