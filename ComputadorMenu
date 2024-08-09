@@ -1,0 +1,97 @@
+package aula02;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ComputadorTeste {
+
+	static Scanner teclado = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int opc = 0;
+		ArrayList<Computador> list = new ArrayList<Computador>();
+
+		do {
+			System.out.println("\t\t\t\t\t\t\tPrograma para cadastro do computador");
+			System.out.println("|------------------------|");
+			System.out.println("| OPÇÃO 1. CADASTRAR     |");
+			System.out.println("| OPÇÃO 2. LISTAR        |");
+			System.out.println("| OPÇÃO 3. EDITAR        |");
+			System.out.println("| OPÇÃO 4. REMOVER       |");
+			System.out.println("| OPÇÃO 5. SAIR          |");
+			System.out.println("|------------------------|");
+
+			System.out.print("Digite a opção desejada: ");
+			opc = teclado.nextInt();
+			teclado.nextLine(); // Consumir a nova linha após nextInt()
+
+			switch (opc) {
+			case 1:
+				// CADASTRO
+				System.out.print("Digite o nome do computador: ");
+				String nome = teclado.nextLine();
+
+				System.out.print("Digite o clock: ");
+				int clock = teclado.nextInt();
+				teclado.nextLine(); // Consumir a nova linha após nextInt()
+
+				Computador pc = new Computador(nome, clock);
+				list.add(pc);
+				break;
+
+			case 2:
+				// LISTAR
+				for (Computador pont : list) {
+					System.out.println(pont);
+				}
+				break;
+
+			case 3:
+				// EDITAR
+				System.out.print("Digite o nome do pc ao qual deseja editar: ");
+				String edit = teclado.nextLine();
+
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getNome().equals(edit)) {
+						list.remove(i);
+
+						System.out.print("Digite o nome do computador: ");
+						nome = teclado.nextLine();
+
+						System.out.print("Digite o clock: ");
+						clock = teclado.nextInt();
+						teclado.nextLine(); // Consumir a nova linha após nextInt()
+
+						Computador newPc = new Computador(nome, clock);
+						list.add(newPc);
+						break;
+					}
+				}
+				break;
+
+			case 4:
+				// REMOVER
+				System.out.print("Digite o nome do computador que deseja remover: ");
+				String remover = teclado.nextLine();
+
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getNome().equals(remover)) {
+						list.remove(i);
+						System.out.println("Computador removido com sucesso");
+						break;
+					}
+				}
+				break;
+
+			case 5:
+				System.out.println("Muito obrigado!");
+				System.exit(0);
+				break;
+
+			default:
+				System.out.println("[ERRO] opção digitada está fora do menu");
+				break;
+			}
+		} while (opc != 5);
+	}
+}
