@@ -1,0 +1,64 @@
+/*
+ * adicionar frutas com um nome e preço a uma lista.
+ * Verifica se os campos de nome e preço estão preenchidos e se o preço é um número válido.
+ * Assinado: Programador Paulo Jumanji e Henry lgbtqiapn+
+ */
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FrutaActivity extends AppCompatActivity {
+
+    // Lista para armazenar as frutas
+    List<String> listFrutas = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+    }
+
+    public void adicionarFruta(View view) {
+        // Pegando os componentes da interface gráfica
+        EditText nome = findViewById(R.id.editTextNome);
+        EditText preco = findViewById(R.id.editTextPreco);
+
+        // Pegando o conteúdo da caixa de nome
+        String conteudoNome = nome.getText().toString().trim();
+        // Pegando o conteúdo da caixa de preço
+        String conteudoPreco = preco.getText().toString().trim();
+
+        // Verificando se os campos são vazios nas 2 maneiras
+        if (conteudoNome.equals("") || conteudoPreco.isEmpty()) {
+            // Mensagem de erro caso os campos estejam vazios
+            Toast.makeText(this, "Os campos nome e preço devem ser preenchidos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        float precoFloat;
+        try {
+            // Converte String em float
+            precoFloat = Float.parseFloat(conteudoPreco);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Preço deve ser um número válido, exemplo: 120.00", Toast.LENGTH_SHORT).show();
+            return; 
+        }
+
+        // Adiciona a fruta na lista
+        listFrutas.add("Fruta: " + conteudoNome + ", Preço: " + precoFloat);
+
+        // Mensagem de sucesso
+        Toast.makeText(this, "Fruta salva com sucesso", Toast.LENGTH_SHORT).show();
+
+        // Serve para limpar os campos de entrada
+        nome.setText("");
+        preco.setText("");
+    }
+}
