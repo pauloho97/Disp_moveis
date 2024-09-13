@@ -42,7 +42,26 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-         //Este método foi atualizado na aula 05
+        List<String> listalogin = Arrays.asList("admin","paulo","batatinha","Jumanji");
+
+        //Aqui ele capta o nome da lista de login
+        if(listalogin.contains(conteudoLogin) && conteudoSenha.equals("123")){
+            //acessar dashboard
+            Bundle bundle = new Bundle();
+            bundle.putString("Login",conteudoLogin);
+
+            //significa que ESTA(this) classe será pai da DashBoardActivity
+            Intent intent = new Intent(this,DashBoardActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }else {
+            Toast.makeText(this, "Usuario ou senha invalida", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+        /*
         if(conteudoLogin.equals("admin") && conteudoSenha.equals("123")){
             //acessar dashboard
                                        //significa que ESTA(this) classe será pai da DashBoardActivity
@@ -51,6 +70,6 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "Usuario ou senha invalida", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
     }
 }
