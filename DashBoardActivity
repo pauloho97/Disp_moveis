@@ -11,7 +11,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class DashBoardActivity extends AppCompatActivity {
+    ArrayList<Pet> listaPet = new ArrayList<Pet>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,40 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
     public void cadastrar(View view){
-
+        //Abre a activity de cadastro e leva as informações para a tela CadastroActivity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lista_pet",listaPet);
         Intent intent = new Intent(this,CadastroActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     public void listar(View view){
+        //Abre a activity de cadastro e leva as informações para a tela CadastroActivity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lista_pet",listaPet);
         Intent intent = new Intent(this, ListagemActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    public void atualizar(View view){
+        //Abre a activity de atualização e leva as informações para a tela CadastroActivity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lista_pet",listaPet);
+        Intent intent = new Intent(this, AtualizarPetActivity.class);
+        startActivity(intent);
+        intent.putExtras(bundle);
+    }
+
+    public void remover(View view){
+        //Abre a activity de remoção e leva as informações para a tela CadastroActivity
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("lista_pet",listaPet);
+        Intent intent = new Intent(this, RemoverPetActivity.class);
+        startActivity(intent);
+        intent.putExtras(bundle);
+    }
+
+
 }
