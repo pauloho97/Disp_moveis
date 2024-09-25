@@ -1,0 +1,46 @@
+package com.example.atividade2;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class ActivityB extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_b);
+
+        //Pegando dados da tela A
+        String dadosA = (String) getIntent().getSerializableExtra("dados");
+        Toast.makeText(this, "Dados captados da tela A com sucesso: " + dadosA, Toast.LENGTH_SHORT).show();
+        setTitle("TElA B");
+    }
+
+    public void EnviarB(View view){
+        EditText telaB = findViewById(R.id.editTextDadosA);
+        String dadosB = telaB.getText().toString().trim();
+
+        if(dadosB.isEmpty()){
+            Toast.makeText(this, "Por favor, informe algum dado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(this, ActivityA.class);
+        bundle.putString("dados", dadosB);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+        Toast.makeText(this, "Dados enviados com sucesso", Toast.LENGTH_SHORT).show();
+    }
+
+}
