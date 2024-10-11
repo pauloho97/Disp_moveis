@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DadosCompartilhados {
+    private static Integer idPet;
     public static String usuarioLogado = "";
     public static List<Pet> lista = new ArrayList<>();
+
+    public static Integer getProximoId(){
+        idPet = idPet + 1;
+        return idPet;
+    }
 }
