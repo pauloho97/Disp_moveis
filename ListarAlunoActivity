@@ -1,0 +1,37 @@
+package com.example.alunoapplication;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class ListarAlunoActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listar_aluno);
+
+        setTitle("Lista de Alunos");
+
+        ListView listView = findViewById(R.id.listViewAluno);
+
+        // 8 , 7,6
+        // 0,8, 15,21
+        float somador=0;
+        for (Aluno aluno : CompartilharDados.lista ){
+            somador=  aluno.nota + somador;
+        }
+
+        float media = somador / CompartilharDados.lista.size();
+
+    }
+
+
+
+
+}
