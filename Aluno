@@ -1,0 +1,21 @@
+package com.example.alunoapplication;
+
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
+    public String nome;
+    public Float nota;
+
+    public Aluno(String nome, Float nota) {
+        this.nome = nome;
+        this.nota = nota;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nome='" + nome + '\'' +
+                ", nota=" + nota +
+                '}';
+    }
+}
