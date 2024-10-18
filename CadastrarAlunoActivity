@@ -1,0 +1,57 @@
+package com.example.alunoapplication;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class CadastrarAlunoActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastrar_aluno);
+
+
+        setTitle("Cadastrar");
+
+
+    }
+
+    public void cadastrarOPet(View view){
+        EditText textoNome = findViewById(R.id.editTextNome);
+        EditText textoNota = findViewById(R.id.editTextNota);
+
+        String nomeAluno = textoNome.getText().toString().trim();
+        Float notaAluno;
+
+        if(nomeAluno.isEmpty() || textoNota.getText().toString().isEmpty()){
+            Toast.makeText(this, R.string.preenchaCampos, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try{
+            notaAluno = Float.parseFloat(textoNota.getText().toString().trim());
+        } catch(Exception e){
+            Toast.makeText(this, R.string.numerosReais, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        Aluno aluno = new Aluno(nomeAluno,notaAluno);
+        CompartilharDados.lista.add(aluno);
+
+        textoNome.setText("");
+        textoNota.setText("");
+
+
+
+
+    }
+}
