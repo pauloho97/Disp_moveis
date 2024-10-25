@@ -43,7 +43,10 @@ public class CadastroActivity extends AppCompatActivity {
         Pet pet = new Pet();
         pet.nome = nome;
         pet.idade = Integer.parseInt(idade);
-        DadosCompartilhados.lista.add(pet);
+
+         //envia os dados da classe CadastroActivity para o RepositorioPet, ou seja, no BD
+        repositorioPet.adicionarPet(pet);
+    
         Toast.makeText(this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
 
         editTextNome.setText("");
