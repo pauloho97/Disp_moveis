@@ -1,0 +1,36 @@
+package com.example.petapp;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+public class RepositorioLog extends SQLiteOpenHelper {
+
+    public RepositorioLog(@Nullable Context context) {
+        super(context, "log", null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String sql = "create table log" + "(integer id not null primary key," + "data text," + "operacao text," + "usuario text)";
+        sqLiteDatabase.execSQL(sql);
+        Log.i("log", "log criado com sucesso");
+
+    }
+
+    public void inserirLog(Log log){
+        String sql = "INSERT INTO log VALUES (null, '" + log.data_operacao + "', '" + log.operacao + "', '" + log.usuario + "')";
+        Log.i("log", "log inserido com sucesso");
+        super.getWritableDatabase().execSQL(sql);
+
+    }
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+}
