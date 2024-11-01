@@ -1,9 +1,18 @@
 package com.example.petapp;
 
+
+//entidade pet, pois entidade é uma classe que apenas armazena atributos
 public class Pet {
     public Integer id;
     public String nome;
     public Integer idade;//Integer na verdade é uma classe com funcionalidades
 
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", idade=" + idade +
+                '}';
+    }
 }
-
