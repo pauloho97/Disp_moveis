@@ -1,0 +1,70 @@
+package com.example.petapp;
+
+import static com.example.petapp.DadosCompartilhados.lista;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class RepositorioLog extends SQLiteOpenHelper {
+
+    public RepositorioLog(@Nullable Context context) {
+        super(context, "log", null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String sql = "create table log" + "(integer id not null primary key," + "data text," + "operacao text," + "usuario text)";
+        sqLiteDatabase.execSQL(sql);
+        Log.i("log", "log criado com sucesso");
+
+    }
+
+    public void inserirLog( com.example.petapp.Log log){
+        String sql = "INSERT INTO log VALUES (null, '" + log.data_operacao + "', '" + log.operacao + "', '" + log.usuario + "')";
+        Log.i("log", "log inserido com sucesso");
+        super.getWritableDatabase().execSQL(sql);
+
+    }
+
+    public List<com.example.petapp.Log> listarLogs(String usuario){
+
+        ArrayList<Log> lista = new ArrayList<Log>();
+        StringBuilder sql = new StringBuilder("SELECT * from log where log");
+        if(usuario != null){
+            sql.append(" where usuario = '"
+            sql.append(usuario);
+            sql.append(');
+        }
+
+        Cursor cursor = getWritableDatabase().rawQuery(sql.toString(),null);
+        cursor.moveToFirst();
+
+        for(int i=0 ; i < cursor.getCount(); i++){
+            Log log = new Log();
+            log.id = cursor.getInt(0);
+            log.data = cursor.getString(1);
+            log.operacao  = cursor.getInt(2);
+            lista.add(log);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return lista;
+    }
+
+
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+}
