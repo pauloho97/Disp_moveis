@@ -1,11 +1,16 @@
 package com.example.petapp;
 
+import static com.example.petapp.DadosCompartilhados.lista;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.List;
 
 public class RepositorioPet extends SQLiteOpenHelper {
 
@@ -29,6 +34,67 @@ public class RepositorioPet extends SQLiteOpenHelper {
         Log.i("pet", "SQL insert pet: " + sql);
         super.getWritableDatabase().execSQL(sql);
     }
+
+    public List<Pet> listarPet(){
+        String sql = "SELECT * from Pet";
+        Cursor cursor = getWritableDatabase().rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        for(int i=0 ; i < cursor.getCount(); i++){
+            Pet pet = new Pet();
+            pet.id = cursor.getInt(0);
+            pet.nome = cursor.getString(1);
+            pet.idade  = cursor.getInt(2);
+            lista.add(pet);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return lista;
+    }
+
+    //buscar pet pelo id
+    public Pet buscarPet(Integer id){
+        String sql = "SELECT * from pet where id";
+        Cursor cursor = getWritableDatabase().rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        Pet pet = null;
+
+        for(int i=0 ; i < cursor.getCount(); i++){
+            pet = new Pet();
+            pet.id = cursor.getInt(0);
+            pet.nome = cursor.getString(1);
+            pet.idade  = cursor.getInt(2);
+            lista.add(pet);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return pet;
+    }
+
+    //buscar pet pelo nome
+    public Pet buscarPetPeloNome(String nome){
+        String sql = "SELECT * from pet where " + "nome = " + nome;
+        Cursor cursor = getWritableDatabase().rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        Pet pet = null;
+
+        for(int i=0 ; i < cursor.getCount(); i++){
+            pet = new Pet();
+            pet.id = cursor.getInt(0);
+            pet.nome = cursor.getString(1);
+            pet.idade  = cursor.getInt(2);
+            lista.add(pet);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return pet;
+    }
+
 
     //executa nas outras próximas vezes
     @Override
